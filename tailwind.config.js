@@ -1,4 +1,3 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -12,10 +11,13 @@ module.exports = {
       fontFamily: {
         mono: ['DM Mono', 'monospace'],
       },
+      screens: {
+        xs: '540px', // Custom `xs` breakpoint
+      },
     },
   },
   plugins: [
-    require('@tailwindcss/typography'),  // Move the plugin here
+    require('@tailwindcss/typography'), // Tailwind typography plugin
     function ({ addUtilities }) {
       addUtilities({
         '.gradient-border-b': {
@@ -25,10 +27,23 @@ module.exports = {
             position: 'absolute',
             bottom: '0',
             left: '0',
-            width: '85%',
-            height: '0.9px',  // Adjust thickness
+            width: '165%', // Default width for small screens
+            height: '0.9px',
             background: 'linear-gradient(to right, #00000099, #0000000F)',
           },
+          '@media (min-width: 540px)': { // Media query for larger screens
+            '&::after': {
+              width: '112%', // Change width to 100% on screens >= 640px
+            },
+            
+          },
+          '@media (min-width: 640px)': { // Media query for larger screens
+            '&::after': {
+              width: '100%', // Change width to 100% on screens >= 640px
+            },
+            
+          },
+          
         },
       });
     },
