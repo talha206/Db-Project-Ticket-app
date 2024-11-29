@@ -1,11 +1,16 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import TicketTimeTracker from '../tickets/Ticket';
 import { tickets } from '../../lib/tickets';
+import { handleCreateNewTicket}  from 'app/tickets/NewTicket'; // Import handler
 
-const Ticket = () => {
+const Ticket: React.FC = () => {
+  const [rightSectionContent, setRightSectionContent] = useState<JSX.Element | null>(null);
+
   return (
     <div className="w-full h-max font-mono">
-      {/* Header */}  
+      {/* Header */}
       <h1 className="sm:w-full 2xl:text-3xl sm:text-2xl text-lg sm:py-6 py-4 sm:pl-16 pl-8 text-[#9B9BC3] font-normal bg-[#424247] tracking-widest">
         Ticket Time Tracker
       </h1>
@@ -24,27 +29,32 @@ const Ticket = () => {
             </div>
           </div>
 
-          {/* Right Section - Create New Ticket */}
-          <div className="bg-[#EFEFF0] rounded-xl lg:w-[40%] 2xl:w-[35%] w-[70%] 2xl:h-[44rem] sm:h-[340px] h-72 lg:h-[38rem] xl:h-[40rem] lg:mt-7 sm:ml-0 ml-4 pb-10 flex flex-col">
-            
-            {/* Centered Heading */}
-            <div className="  flex  justify-center ">
-              <h1 className="w-max lg:text-sm xl:text-base sm:text-[15px] text-xs text-center font-medium 2xl:text-lg sm:pr-[50px] sm:pl-[49px] sm:pt-9 pr-9 pl-10 lg:pr-3 lg:pl-4 xl:pr-9 xl:pl-10 pt-7 leading-relaxed">
-                Select an existing ticket to log time <br /><span> or </span><br />
-                <span className="underline underline-offset-2">Create a new one</span>
-              </h1>
-            </div>
-
-            {/* Ticket Actions */}
-            <div className="lg:pt-[72px] md:pt-8 sm:pt-6 sm:pl-12 sm:pr-9 pl-10 pr-8 lg:pr-5 lg:pl-6 xl:pr-9 xl:pl-10 pt-10">
-              <span className="mr-2 bg-[#D9D9D9] 2xl:h-10 lg:h-[33px] md:h-7 h-5 w-full inline-block"></span>
-              <span className="mr-2 bg-[#D9D9D9] 2xl:h-10 lg:h-[33px] md:h-7 h-5 w-full inline-block md:mt-[26px] sm:mt-5 mt-3"></span>
-              <div className="grid grid-cols-2 gap-x-4 items-center">
-                <span className="mr-2 bg-[#D9D9D9] 2xl:h-10 lg:h-[33px] md:h-7 h-5 w-full inline-block md:mt-[26px] sm:mt-5 mt-3"></span>
-                <span className="mr-2 bg-[#D9D9D9] 2xl:h-10 lg:h-[33px] md:h-7 h-5 w-full inline-block md:mt-[26px] sm:mt-5 mt-3"></span>
+          {/* Right Section */}
+          <div className="bg-[#EFEFF0] rounded-xl lg:w-[40%] 2xl:w-[35%] w-[70%] 2xl:h-[44rem] sm:h-auto h-auto lg:h-[38rem] xl:h-[40rem] lg:mt-7 sm:ml-0 ml-4 pb-10 flex flex-col">
+            {/* Dynamically Render Right Section Content */}
+            {rightSectionContent || (
+              <div>
+                <div className="flex justify-center">
+                  <h1 className="w-max lg:text-sm xl:text-base sm:text-[15px] text-xs text-center font-medium 2xl:text-lg sm:pr-[50px] sm:pl-[49px] sm:pt-9 pr-9 pl-10 lg:pr-3 lg:pl-4 xl:pr-9 xl:pl-10 pt-7 leading-relaxed">
+                    Select an existing ticket to log time <br /><span> or </span><br />
+                    <span
+                      className="underline underline-offset-2 cursor-pointer"
+                      onClick={() => handleCreateNewTicket(setRightSectionContent)} // Call handler here
+                    >
+                      Create a new one
+                    </span>
+                  </h1>
+                </div>
+                <div className="lg:pt-[72px] md:pt-8 sm:pt-6 sm:pl-12 sm:pr-9 pl-10 pr-8 lg:pr-5 lg:pl-6 xl:pr-9 xl:pl-10 pt-10">
+                  <span className="mr-2 bg-[#D9D9D9] 2xl:h-10 lg:h-[33px] md:h-7 h-5 w-full inline-block"></span>
+                  <span className="mr-2 bg-[#D9D9D9] 2xl:h-10 lg:h-[33px] md:h-7 h-5 w-full inline-block md:mt-[26px] sm:mt-5 mt-3"></span>
+                  <div className="grid grid-cols-2 gap-x-4 items-center">
+                    <span className="mr-2 bg-[#D9D9D9] 2xl:h-10 lg:h-[33px] md:h-7 h-5 w-full inline-block md:mt-[26px] sm:mt-5 mt-3"></span>
+                    <span className="mr-2 bg-[#D9D9D9] 2xl:h-10 lg:h-[33px] md:h-7 h-5 w-full inline-block md:mt-[26px] sm:mt-5 mt-3"></span>
+                  </div>
+                </div>
               </div>
-            </div>
-
+            )}
           </div>
         </div>
       </div>

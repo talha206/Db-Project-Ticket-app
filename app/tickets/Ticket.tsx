@@ -1,17 +1,32 @@
 "use client";
 
-import React from 'react';
-import { Ticket } from '../../lib/types';
+import React from "react";
+import { Ticket } from "../../lib/types";
 
 interface TicketTimeTrackerProps {
   tickets: Ticket[];
 }
 
+// Helper function to process and underline "Log time"
+const processTimeLogged = (timeLogged: string) => {
+  if (timeLogged.includes("Log time")) {
+    const [before, after] = timeLogged.split("Log time");
+    return (
+      <>
+        {before}
+        <u className="text-black-600 cursor-pointer">Log time</u>
+        {after}
+      </>
+    );
+  }
+  return timeLogged;
+};
+
 const TicketTimeTracker: React.FC<TicketTimeTrackerProps> = ({ tickets }) => {
   return (
     <div className="font-mono xs:w-auto w-[295px]">
       {/* Container for ticket tracker */}
-      <div className="relative bg-white rounded-lg xs:overflow-x-visible overflow-x-auto h-auto   ml-7 xs:ml-0 sm:ml-0">
+      <div className="relative bg-white rounded-lg xs:overflow-x-visible overflow-x-auto h-auto ml-7 xs:ml-0 sm:ml-0">
         {/* Header Row */}
         <div className="grid sm:grid-cols-[330px,200px] grid-cols-[260px,125px] gap-x-6 2xl:gap-x-32 font-normal pb-2 mb-2">
           <div className="2xl:text-lg text-xs sm:text-[13px] italic">Ticket</div>
@@ -90,7 +105,7 @@ const TicketTimeTracker: React.FC<TicketTimeTrackerProps> = ({ tickets }) => {
               {/* Right Column - Time Logged */}
               <div>
                 <span className="font-normal 2xl:text-[16px] sm:text-[13px] text-[11px] sm:pl-8 whitespace-nowrap">
-                  {ticket.timeLogged}
+                  {processTimeLogged(ticket.timeLogged)}
                 </span>
               </div>
             </div>

@@ -13,7 +13,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: system-ui, sans-serif;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 a {
