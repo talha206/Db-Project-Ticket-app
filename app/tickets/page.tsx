@@ -4,22 +4,22 @@ import { tickets } from '../../lib/tickets';
 
 const Ticket = () => {
   return (
-    <div className="w-full h-auto font-mono">
-      {/* Header */}
-      <h1 className="sm:w-full 2xl:text-3xl sm:text-2xl text-lg py-6 sm:pl-16 pl-8 text-[#9B9BC3] font-normal bg-[#424247] tracking-widest">
+    <div className="w-full h-max font-mono">
+      {/* Header */}  
+      <h1 className="sm:w-full 2xl:text-3xl sm:text-2xl text-lg sm:py-6 py-4 sm:pl-16 pl-8 text-[#9B9BC3] font-normal bg-[#424247] tracking-widest">
         Ticket Time Tracker
       </h1>
 
       {/* Main Container */}
       <div className="2xl:px-16 lg:pl-12 lg:pr-8 xl:px-14 md:px-12 sm:px-8 py-10">
-        <div className="flex flex-col-reverse lg:flex-row lg:gap-x-4 items-center lg:items-start justify-between">
+        <div className="w-[303px] xxs:w-auto flex flex-col-reverse lg:flex-row lg:gap-x-4 items-center lg:items-start justify-between">
           
           {/* Left Section - Existing Tickets */}
-          <div className="inline-block xl:ml-7">
-            <h2 className="2xl:text-2xl lg:text-xl md:text-lg text-base font-medium mt-10 ml-10 xs:ml-2 sm:ml-0">
+          <div className="w-max inline-block xl:ml-7">
+            <h2 className="w-max 2xl:text-2xl lg:text-xl md:text-lg text-base font-medium mt-10 lg:mt-1 ml-10 xs:ml-2 sm:ml-0">
               Existing tickets
             </h2>
-            <div className="pt-7 sm:pt-12 ml-2 sm:ml-0">
+            <div className="w-max pt-7 sm:pt-12  sm:ml-0">
               <TicketTimeTracker tickets={tickets} />
             </div>
           </div>

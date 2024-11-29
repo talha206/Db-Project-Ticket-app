@@ -12,7 +12,8 @@ module.exports = {
         mono: ['DM Mono', 'monospace'],
       },
       screens: {
-        xs: '540px', // Custom `xs` breakpoint
+        xs: '540px',
+        xxs:'360px', // Custom `xs` breakpoint
       },
     },
   },
