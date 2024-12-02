@@ -1,12 +1,37 @@
-"use client";
-
+'use client'
 import React, { useState } from 'react';
-import TicketTimeTracker from '../tickets/Ticket';
+import TicketTimeTracker from '../tickets/Ticket'; // Assuming this is your component
 import { tickets } from '../../lib/tickets';
-import { handleCreateNewTicket}  from 'app/tickets/NewTicket'; // Import handler
+import { handleCreateNewTicket } from 'app/tickets/NewTicket'; // Import handler
+import LogTimeForm from './updateform'; // Import your form component
+import { Ticket as TicketType } from '../../lib/types'; // Import the original Ticket type
+
+interface ExtendedTicket extends TicketType {
+  description: string; // Add the missing description field here
+}
 
 const Ticket: React.FC = () => {
   const [rightSectionContent, setRightSectionContent] = useState<JSX.Element | null>(null);
+  const [selectedTicket, setSelectedTicket] = useState<ExtendedTicket | null>(null); // Use the extended type
+
+  // Handler for when "Log time" is clicked
+  const handleLogTimeClick = (ticketId: string, ticketTitle: string) => {
+    const ticket = tickets.find((t) => t.id === ticketId); // Find the ticket by ID
+    if (ticket) {
+      const extendedTicket: ExtendedTicket = {
+        ...ticket, // Spread the original ticket properties
+        description: '' // Provide a description if needed
+      };
+      setSelectedTicket(extendedTicket); // Set the selected ticket
+      setRightSectionContent(
+        <LogTimeForm
+          ticketId={ticket.id}
+          ticketTitle={ticket.title} // Pass the ticketTitle here
+          onClose={() => setRightSectionContent(null)}
+        />
+      );
+    }
+  };
 
   return (
     <div className="w-full h-max font-mono">
@@ -24,13 +49,13 @@ const Ticket: React.FC = () => {
             <h2 className="w-max 2xl:text-2xl lg:text-xl md:text-lg text-base font-medium mt-10 lg:mt-1 ml-10 xs:ml-2 sm:ml-0">
               Existing tickets
             </h2>
-            <div className="w-max pt-7 sm:pt-12  sm:ml-0">
-              <TicketTimeTracker tickets={tickets} />
+            <div className="w-max pt-7 sm:pt-12 sm:ml-0">
+              <TicketTimeTracker tickets={tickets} onLogTimeClick={handleLogTimeClick} />
             </div>
           </div>
 
-          {/* Right Section */}
-          <div className="bg-[#EFEFF0] rounded-xl lg:w-[40%] 2xl:w-[35%] w-[70%] 2xl:h-[44rem] sm:h-auto h-auto lg:h-[38rem] xl:h-[40rem] lg:mt-7 sm:ml-0 ml-4 pb-10 flex flex-col">
+          {/* Right Section - Render dynamically based on the selected ticket */}
+          <div className="bg-[#EFEFF0] rounded-xl lg:w-[40%] 2xl:w-[35%] w-[70%] 2xl:h-[44rem] sm:h-[340px] h-72 lg:h-[38rem] xl:h-[40rem] lg:mt-7 sm:ml-0 ml-4 pb-10 flex flex-col">
             {/* Dynamically Render Right Section Content */}
             {rightSectionContent || (
               <div>

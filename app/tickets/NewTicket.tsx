@@ -5,7 +5,7 @@ export const handleCreateNewTicket = (
     setRightSectionContent: React.Dispatch<React.SetStateAction<JSX.Element | null>>
   ): void => {
     setRightSectionContent(
-      <div className="px-14 py-10 font-mono bg-white border-2 border-gray-300 rounded-xl">
+      <div className=" lg:h-[44rem] xl:h-[44rem] sm:h-auto  h-72 px-14 py-10 font-mono bg-white border-2 border-gray-300 rounded-xl   ">
         <form className="flex flex-col">
           <h1 className="text-lg ml-2 font-medium  mb-3">Create New Ticket</h1>
           
@@ -65,7 +65,7 @@ export const handleCreateNewTicket = (
               id="hours"
               type="number"
               className="w-full p-3 pt-4 pb-3 border border-gray-300 rounded-lg text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent peer"
-              placeholder=" "
+              placeholder="0.00"
             />
             <label
               htmlFor="hours"

@@ -2,19 +2,30 @@
 
 import React from "react";
 import { Ticket } from "../../lib/types";
+import LogTimeForm from "./updateform";
 
 interface TicketTimeTrackerProps {
   tickets: Ticket[];
+  onLogTimeClick?: (ticketId: string, ticketTitle: string) => void; // Callback when "Log time" is clicked
 }
 
 // Helper function to process and underline "Log time"
-const processTimeLogged = (timeLogged: string) => {
+const processTimeLogged = (
+  timeLogged: string,
+  ticket: Ticket,
+  onLogTimeClick?: (ticketId: string, ticketTitle: string) => void
+) => {
   if (timeLogged.includes("Log time")) {
     const [before, after] = timeLogged.split("Log time");
     return (
       <>
         {before}
-        <u className="text-black-600 cursor-pointer">Log time</u>
+        <u
+          className="text-black-600 cursor-pointer"
+          onClick={() => onLogTimeClick && onLogTimeClick(ticket.id, ticket.title)} // Trigger callback on click
+        >
+          Log time
+        </u>
         {after}
       </>
     );
@@ -22,7 +33,8 @@ const processTimeLogged = (timeLogged: string) => {
   return timeLogged;
 };
 
-const TicketTimeTracker: React.FC<TicketTimeTrackerProps> = ({ tickets }) => {
+
+const TicketTimeTracker: React.FC<TicketTimeTrackerProps> = ({ tickets, onLogTimeClick }) => {
   return (
     <div className="font-mono xs:w-auto w-[295px]">
       {/* Container for ticket tracker */}
@@ -105,7 +117,7 @@ const TicketTimeTracker: React.FC<TicketTimeTrackerProps> = ({ tickets }) => {
               {/* Right Column - Time Logged */}
               <div>
                 <span className="font-normal 2xl:text-[16px] sm:text-[13px] text-[11px] sm:pl-8 whitespace-nowrap">
-                  {processTimeLogged(ticket.timeLogged)}
+                  {processTimeLogged(ticket.timeLogged, ticket, onLogTimeClick)}
                 </span>
               </div>
             </div>

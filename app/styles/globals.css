@@ -14,6 +14,7 @@ body {
   margin: 0;
   font-family: system-ui, sans-serif;
   overflow-y: auto;
+  
 }
 
 a {
@@ -25,3 +26,4 @@ a {
 * {
   box-sizing: border-box;
 }
+ 
