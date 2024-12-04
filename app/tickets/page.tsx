@@ -55,8 +55,8 @@ const Ticket: React.FC = () => {
           </div>
 
           {/* Right Section - Render dynamically based on the selected ticket */}
-          <div className={`bg-[#EFEFF0] rounded-xl lg:w-[40%] 2xl:w-[35%] w-[70%] 2xl:h-[44rem] sm:h-[340px] h-72 lg:h-[38rem] xl:h-[40rem] lg:mt-7 sm:ml-0 ml-4 pb-10 flex flex-col ${
-    rightSectionContent ? ' mb-10 lg:mb-0' : ''
+          <div className={`bg-[#EFEFF0] rounded-xl lg:w-[40%] 2xl:w-[35%] 2xl:h-[44rem] sm:h-[340px] h-72 lg:h-[38rem] xl:h-[40rem] lg:mt-7 sm:ml-0 ml-4 pb-10 flex flex-col ${
+    rightSectionContent ? 'w-[82%] mb-32 xrs:mb-20 lg:mb-0' : ' w-[72%] '
   }`}>
             {/* Dynamically Render Right Section Content */}
             {rightSectionContent || (

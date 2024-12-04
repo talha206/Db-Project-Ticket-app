@@ -11,14 +11,33 @@ const LogTimeForm: React.FC<LogTimeFormProps> = ({ ticketId, ticketTitle, onClos
   const [notes, setNotes] = useState<string>("");
 
   return (
-    <div className="lg:w-[100%] 2xl:w-[35%] w-[70%] 2xl:h-[44rem] sm:h-[340px] h-72 lg:h-[38rem] xl:h-[40rem] mt-10 p-4 bg-white rounded-lg border border-[#7D7D82] ">
-      <h2 className="text-lg font-semibold mb-4">
-        {ticketId} {ticketTitle}
+    <div className=" w-[70%] font-mono lg:w-full 2xl:w-[35%] 2xl:h-[44rem] sm:h-[340px] h-72 lg:h-[38rem] xl:h-[40rem]  bg-white rounded-lg border border-[#7D7D82] ">
+      <h2 className="text-lg flex items-center ml-7 mb-4 mt-5">
+      <span className="mr-3 ">
+                  <svg
+                    className="lg:w-[18px] md:w-[19px] sm:w-[17px] w-[10px]"
+                    viewBox="0 0 23 22"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="0.792969"
+                      y="0.304443"
+                      width="21.5147"
+                      height="21.5147"
+                      rx="3.58578"
+                      fill="#1E8826"
+                    />
+                    <circle cx="11.5501" cy="11.0618" r="4.48223" fill="white" />
+                  </svg>
+                </span>
+        <span className=" font-medium mr-3">{ticketId} </span>
+        <span>{ticketTitle}</span>
       </h2>
-        <span className=" border-t-2 border-black w-[100%] "></span>
+      <span className="block w-full h-[1px] bg-[#7D7D82] "></span>
       {/* Manual Time Logging */}
-      <div className="mb-4">
-        <label htmlFor="manualTime" className="block text-lg font-medium text-gray-700">
+      <div className="mb-7 ml-7 mr-10">
+        <label htmlFor="manualTime" className="block text-lg mb-4 ">
           Log time manually
         </label>
         <input
@@ -26,14 +45,14 @@ const LogTimeForm: React.FC<LogTimeFormProps> = ({ ticketId, ticketTitle, onClos
           id="manualTime"
           value={manualTime}
           onChange={(e) => setManualTime(e.target.value)}
-          className="mt-1 block w-full rounded-[4px] border border-[#b4b4bb]  focus:border-blue-500 focus:ring-blue-500 sm:text-sm pl-3 ml-[29px] mr-[43px]"
+          className="mt-1 block w-full h-9 rounded border border-[#b4b4bb]  focus:border-blue-500 focus:ring-blue-500 sm:text-sm pl-3   mr-[43px]"
         />
       </div>
 
       {/* Timer Section */}
-      <div className="mb-4">
+      <div className="mb-4 mx-7 ">
         <div className="flex justify-between items-center">
-        <label className="block text-lg font-medium text-gray-700 mb-2">Track with Timer</label>
+        <label className="block text-lg  mb-2">Track with Timer</label>
         <div className="mb-2 text-blue-500 text-sm underline cursor-pointer">
           Use countdown timer
         </div>
@@ -64,17 +83,18 @@ const LogTimeForm: React.FC<LogTimeFormProps> = ({ ticketId, ticketTitle, onClos
           </div>
 
           {/* Timer Controls */}
-          <div className="space-x-2 flex text-lg mt-[39px]">
-            <button className="px-4 py-2   text-[#0000006b] rounded-md underline">Reset</button>
-            <button className="px-[38px] py-3 bg-green-600 text-white rounded-md">Start</button>
-            <button className="px-4 py-2    text-[#0000006b] rounded-md underline">Stop</button>
+          <div className="  flex text-lg mt-[39px]">
+            <button className="px-4 py-2 mr-10 text-[#0000006b] rounded-md underline">Reset</button>
+            <button className="px-[38px]  py-3 bg-green-600 text-white rounded-md">Start</button>
+            <button className="px-4 py-2 ml-10 text-[#0000006b] rounded-md underline">Stop</button>
           </div>
         </div>
         
       </div>
+      <span className="block w-auto h-[1px] bg-[#B4B4B8] ml-5 mr-8"></span>
 
       {/* Notes Section */}
-      <div className="relative mb-4">
+      <div className="relative mb-4 mx-9 mt-5">
         <label htmlFor="notes" className="absolute -top-4 left-2 bg-white px-1 block text-sm font-normal text-gray-700">
           Notes
         </label>
@@ -88,7 +108,7 @@ const LogTimeForm: React.FC<LogTimeFormProps> = ({ ticketId, ticketTitle, onClos
       </div>
 
       {/* Buttons */}
-      <div className="flex  justify-around">
+      <div className="flex  justify-around mx-9">
         <button
           type="button"
           onClick={onClose}
