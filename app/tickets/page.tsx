@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import TicketTimeTracker from '../tickets/Ticket'; // Assuming this is your component
 import { tickets } from '../../lib/tickets';
@@ -20,14 +20,14 @@ const Ticket: React.FC = () => {
     if (ticket) {
       const extendedTicket: ExtendedTicket = {
         ...ticket, // Spread the original ticket properties
-        description: '' // Provide a description if needed
+        description: '', // Provide a description if needed
       };
       setSelectedTicket(extendedTicket); // Set the selected ticket
       setRightSectionContent(
         <LogTimeForm
           ticketId={ticket.id}
           ticketTitle={ticket.title} // Pass the ticketTitle here
-          onClose={() => setRightSectionContent(null)}
+          onClose={() => setRightSectionContent(null)} // Reset content on close
         />
       );
     }
@@ -41,9 +41,16 @@ const Ticket: React.FC = () => {
       </h1>
 
       {/* Main Container */}
-      <div className="2xl:px-16 lg:pl-12 lg:pr-8 xl:px-14 md:px-12 sm:px-8 py-10">
-        <div className="w-[303px] xxs:w-auto flex flex-col-reverse lg:flex-row lg:gap-x-4 items-center lg:items-start justify-between">
-          
+      <div className={`2xl:px-16 xl:px-14 md:px-12 sm:px-8 py-10 ${
+          rightSectionContent
+            ? '  lg:pl-10 lg:pr-6 xl:px-14 md:px-12 sm:px-8 py-10 '
+            : ' lg:pl-12 lg:pr-8 '
+        }`}>
+        <div
+          className={`w-[303px] xxs:w-auto flex flex-col-reverse lg:flex-row ${
+            rightSectionContent ? 'gap-x-0' : 'gap-x-4'
+          } items-center lg:items-start justify-between`}
+        >
           {/* Left Section - Existing Tickets */}
           <div className="w-max inline-block xl:ml-7">
             <h2 className="w-max 2xl:text-2xl lg:text-xl md:text-lg text-base font-medium mt-10 lg:mt-1 ml-10 xs:ml-2 sm:ml-0">
@@ -55,15 +62,23 @@ const Ticket: React.FC = () => {
           </div>
 
           {/* Right Section - Render dynamically based on the selected ticket */}
-          <div className={`bg-[#EFEFF0] rounded-xl lg:w-[40%] 2xl:w-[35%] 2xl:h-[44rem] sm:h-[340px] h-72 lg:h-[38rem] xl:h-[40rem] lg:mt-7 sm:ml-0 ml-4 pb-10 flex flex-col ${
-    rightSectionContent ? 'w-[82%] mb-32 xrs:mb-20 lg:mb-0' : ' w-[72%] '
-  }`}>
+               <div className={`bg-[#EFEFF0] rounded-xl 2xl:w-[35%] 2xl:h-[44rem] xl:w-[40%] sm:h-[340px] h-72 lg:h-[38rem] xl:h-[40rem] lg:mt-7 sm:ml-0 ml-4 pb-10 flex flex-col ${
+    rightSectionContent 
+    ? (rightSectionContent.type === LogTimeForm // Check if the content is LogTimeForm
+        ? 'lg:w-[35%] w-[82%]  sm:mb-56 xrs:mb-52 mb-44 lg:mb-10'  // Larger margin for LogTimeForm
+        : 'lg:w-[35%] w-[82%] sm:mb-20  xrs:mb-20 mb-28 lg:mb-0 pb-0 sm:pb-10' // Existing margin for CreateNewTicket
+      ) 
+    : 'lg:w-[40%] w-[72%]'
+  }`}
+          >
             {/* Dynamically Render Right Section Content */}
             {rightSectionContent || (
               <div>
                 <div className="flex justify-center">
                   <h1 className="w-max lg:text-sm xl:text-base sm:text-[15px] text-xs text-center font-medium 2xl:text-lg sm:pr-[50px] sm:pl-[49px] sm:pt-9 pr-9 pl-10 lg:pr-3 lg:pl-4 xl:pr-9 xl:pl-10 pt-7 leading-relaxed">
-                    Select an existing ticket to log time <br /><span> or </span><br />
+                    Select an existing ticket to log time <br />
+                    <span> or </span>
+                    <br />
                     <span
                       className="underline underline-offset-2 cursor-pointer"
                       onClick={() => handleCreateNewTicket(setRightSectionContent)} // Call handler here
