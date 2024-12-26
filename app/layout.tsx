@@ -1,32 +1,26 @@
-import Image from "next/image";
-import type { ReactNode } from "react";
-import { StoreProvider } from "./StoreProvider";
-import { Nav } from "./components/Nav";
+import './styles/globals.css'; // Import global CSS or styles
+import Header from './components/header/header'; // Adjust the path based on your folder structure
+import React from 'react';
 
-import "./styles/globals.css";
-import styles from "./styles/layout.module.css";
+export const metadata = {
+  title: 'My Next.js App',
+  description: 'A modern Next.js application',
+};
 
-interface Props {
-  readonly children: ReactNode;
-}
-
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <StoreProvider>
-      <html lang="en">
-        <body>
-          <section className={styles.container}>
-            
-
-             
-
-             
-            <main className={styles.main}>{children}</main>
-
-            
-          </section>
-        </body>
-      </html>
-    </StoreProvider>
+    <html lang="en">
+      <body>
+        <Header />
+        <main className="pb-10">{children}</main>
+        <footer className="p-4 bg-gray-200 text-center">
+          <p>&copy; 2024 My Next.js App</p>
+        </footer>
+      </body>
+    </html>
   );
 }
